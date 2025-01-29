@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Role;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,5 +19,30 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        $role1 = Role::create(['name' => 'admin']);
+        $role2 = Role::create(['name' => 'accountant']);
+        $role3 = Role::create(['name' => 'cashier']);
+        $role4 = Role::create(['name' => 'producer']);
+        $role5 = Role::create(['name' => 'hr']);
+        $role6 = Role::create(['name' => 'logistic_manager']);
+        $role7 = Role::create(['name' => 'storage_manager']);
+        $role8 = Role::create(['name' => 'sale_manager']);
+
+        $user = User::create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make(123456)
+        ]);
+
+        $user->roles()->attach($role1->id);
+        $roles = Role::all();
+        for ($i = 1; $i <= 7; $i++) {
+            $user = User::create([
+                'name' => $roles[$i]->name,
+                'email' => $roles[$i]->name . '@gmail.com',
+                'password' => Hash::make(123456)
+            ]);
+            $user->roles()->attach($roles[$i]->id);
+        }
     }
 }
