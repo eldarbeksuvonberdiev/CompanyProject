@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
     protected $fillable = [
-        'key',
+        'permission_group_id',
         'name',
-        'permission_group_id'
+        'path',
+        'status',
     ];
 }

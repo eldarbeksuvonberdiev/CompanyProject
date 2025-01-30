@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
-            $table->string('name');
             $table->foreignId('permission_group_id')->constrained('permission_groups')->cascadeOnDelete();
+            $table->string('name');
+            $table->string('path');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
