@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RoleUser;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class RoleUserController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class RoleUserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RoleUser $roleUser)
+    public function show(User $user)
     {
         //
     }
@@ -43,7 +43,7 @@ class RoleUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(RoleUser $roleUser)
+    public function edit(User $user)
     {
         //
     }
@@ -51,7 +51,7 @@ class RoleUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RoleUser $roleUser)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -59,7 +59,7 @@ class RoleUserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RoleUser $roleUser)
+    public function destroy(User $user)
     {
         //
     }
