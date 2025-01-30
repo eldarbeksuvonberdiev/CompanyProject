@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
                 $group = PermissionGroup::firstOrCreate(['name' => $groupName]);
                 $name = ucfirst(str_replace('.', '-', $key));
                 Permission::create([
-                    'key' => $key,
+                    'path' => $key,
                     'name' => $name,
                     'permission_group_id' => $group->id
                 ]);
