@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <title>@yield('title', 'Main')</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="{{ asset('assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
 
@@ -67,16 +67,16 @@
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
                         <li class="nav-item active">
-                            <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                            <a data-bs-toggle="collapse" href="#" class="collapsed" aria-expanded="false">
                                 <i class="fas fa-home"></i>
-                                <p>Dashboard</p>
+                                <p>Admin Actions</p>
                                 <span class="caret"></span>
                             </a>
                             <div class="collapse" id="dashboard">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a href="../demo1/index.html">
-                                            <span class="sub-item">Dashboard 1</span>
+                                        <a href="{{ route('user.index') }}">
+                                            <span class="sub-item">Users</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -335,13 +335,13 @@
                                         <li>
                                             <div class="user-box">
                                                 <div class="avatar-lg">
-                                                    <img src="{{ asset('assets/img/profile.jpg') }}" alt="image profile"
-                                                        class="avatar-img rounded" />
+                                                    <img src="{{ asset('assets/img/profile.jpg') }}"
+                                                        alt="image profile" class="avatar-img rounded" />
                                                 </div>
                                                 <div class="u-text">
                                                     <h4>Hizrian</h4>
                                                     <p class="text-muted">hello@example.com</p>
-                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
+                                                    <a href="#" class="btn btn-xs btn-secondary btn-sm">View
                                                         Profile</a>
                                                 </div>
                                             </div>
@@ -364,97 +364,7 @@
                 </nav>
             </div>
 
-            <div class="container">
-                <div class="page-inner">
-                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-                        <div>
-                            <h3 class="fw-bold mb-3">Dashboard</h3>
-                        </div>
-                        <div class="ms-md-auto py-2 py-md-0">
-                            <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
-                            <a href="#" class="btn btn-primary btn-round">Add Customer</a>
-                        </div>
-                    </div>
-                    {{-- <div class="row">
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                                <i class="fas fa-users"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">Visitors</p>
-                                                <h4 class="card-title">1,294</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-info bubble-shadow-small">
-                                                <i class="fas fa-user-check"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">Subscribers</p>
-                                                <h4 class="card-title">1303</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-success bubble-shadow-small">
-                                                <i class="fas fa-luggage-cart"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">Sales</p>
-                                                <h4 class="card-title">$ 1,345</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-secondary bubble-shadow-small">
-                                                <i class="far fa-check-circle"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">Order</p>
-                                                <h4 class="card-title">576</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-                </div>
-            </div>
+            @yield('content')
 
             <footer class="footer">
                 <div class="container-fluid d-flex justify-content-between">
