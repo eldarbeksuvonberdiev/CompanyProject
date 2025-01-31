@@ -335,14 +335,14 @@
                                         <li>
                                             <div class="user-box">
                                                 <div class="avatar-lg">
-                                                    <img src="{{ asset('assets/img/profile.jpg') }}"
-                                                        alt="image profile" class="avatar-img rounded" />
+                                                    <img src="{{ asset('assets/img/profile.jpg') }}" alt="image profile"
+                                                        class="avatar-img rounded" />
                                                 </div>
                                                 <div class="u-text">
                                                     <h4>Hizrian</h4>
                                                     <p class="text-muted">hello@example.com</p>
-                                                    <a href="profile.html"
-                                                        class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
+                                                        Profile</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -460,26 +460,12 @@
                 <div class="container-fluid d-flex justify-content-between">
                     <nav class="pull-left">
                         <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="http://www.themekita.com">
-                                    ThemeKita
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"> Help </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"> Licenses </a>
-                            </li>
                         </ul>
                     </nav>
-                    <div class="copyright">
-                        2024, made with <i class="fa fa-heart heart text-danger"></i> by
-                        <a href="http://www.themekita.com">ThemeKita</a>
+                    <div class="copyright">{{ now()->year }}, made by <a
+                            href="https://github.com/eldarbeksuvonberdiev">Eldarbek</a>
                     </div>
                     <div>
-                        Distributed by
-                        <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
                     </div>
                 </div>
             </footer>
