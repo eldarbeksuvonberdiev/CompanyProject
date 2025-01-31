@@ -9,9 +9,6 @@
                 <div>
                     <h3 class="fw-bold mb-3">Permission Group</h3>
                 </div>
-                <div class="ms-md-auto py-2 py-md-0">
-                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary btn-round">Add User</a>
-                </div>
             </div>
         </div>
         <div class="page-inner">
@@ -20,18 +17,34 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th>Permission</th>
                         <th>Status</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>#</td>
-                        <td>#</td>
-                    </tr>
+                    @forelse ($permissionGroups as $permissionGroup)
+                        <tr>
+                            <td>{{ $permissionGroup->id }}</td>
+                            <td>{{ $permissionGroup->name }}</td>
+                            <td>
+                                <button
+                                    class="btn btn-secondary btn-round">{{ count($permissionGroup->permissions) }}</button>
+                            </td>
+                            {{-- <td>
+                                @forelse ($permissionGroup->permissions as $permission)
+                                    <li>{{ $permission->name }}</li>
+                                @empty
+                                    Has no permissions yet
+                                @endforelse
+                            </td> --}}
+                            <td>{{ $permissionGroup->status }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    @empty
+                    @endforelse
                 </tbody>
             </table>
         </div>

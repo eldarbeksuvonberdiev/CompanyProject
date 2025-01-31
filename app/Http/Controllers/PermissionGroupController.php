@@ -13,8 +13,8 @@ class PermissionGroupController extends Controller
      */
     public function index()
     {
-        $permissionGroup = PermissionGroup::all();
-        return view('admin.permissionGroup.permission-group');
+        $permissionGroups = PermissionGroup::with('permissions')->get();
+        return view('admin.permissionGroup.permission-group', compact('permissionGroups'));
     }
 
     /**
