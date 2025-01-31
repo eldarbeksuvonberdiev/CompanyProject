@@ -67,16 +67,22 @@
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
                         <li class="nav-item active">
-                            <a data-bs-toggle="collapse" href="#" class="collapsed" aria-expanded="false">
+                            <a data-bs-toggle="collapse" href="#dashboard1" class="collapsed" aria-expanded="false">
                                 <i class="fas fa-home"></i>
                                 <p>Admin Actions</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" id="dashboard">
+                            <div class="collapse" id="dashboard1">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a href="{{ route('user.index') }}">
+                                        <a href="{{ route('admin.user.index') }}">
                                             <span class="sub-item">Users</span>
+                                        </a>
+                                        <a href="{{ route('admin.user.index') }}">
+                                            <span class="sub-item">Roles</span>
+                                        </a>
+                                        <a href="{{ route('admin.permission.index') }}">
+                                            <span class="sub-item">Permission Groups</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -341,7 +347,7 @@
                                                 <div class="u-text">
                                                     <h4>Hizrian</h4>
                                                     <p class="text-muted">hello@example.com</p>
-                                                    <a href="#" class="btn btn-xs btn-secondary btn-sm">View
+                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
                                                         Profile</a>
                                                 </div>
                                             </div>
