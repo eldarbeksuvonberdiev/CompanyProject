@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequests\UserStoreRequest;
 use App\Http\Requests\UserRequests\UserUpdateRequest;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,7 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.user-create');
+        $roles = Role::all();
+        return view('admin.user.user-create', compact('roles'));
     }
 
     /**
@@ -33,7 +35,15 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $userStoreRequest)
     {
+        $validatedData = $userStoreRequest->validated();
+
+        $roleIds = $validatedData['role_id'];
+        unset($validatedData['role_id']);
+        
         $user = User::create($userStoreRequest->validated());
+
+        $user->roles()->attach($roleIds);
+
         return redirect()->route('admin.user.index')->with([
             'status' => 'success',
             'message' => "$user->name user has been successfully created"

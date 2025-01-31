@@ -51,6 +51,22 @@
                         </div>
                     @enderror
                 </div>
+                <div>
+                    <label for="role_id" class="mb-2"><strong>
+                            <h5>Role</h5>
+                        </strong></label>
+                    <select class="form-control form-select mb-3" id="role_id" name="role_id[]"
+                        aria-label="Default select example" {{ count($roles) == 0 ? 'disabled' : '' }}>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('role_id')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 <div class="ms-md-auto py-2 py-md-0" align='right'>
                     <button type="submimt" class="btn btn-primary btn-round">Save</button>
                 </div>

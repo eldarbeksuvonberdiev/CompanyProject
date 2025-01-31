@@ -27,8 +27,8 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Status</th>
                         <th>Role</th>
+                        <th>Status</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -39,11 +39,11 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->roles->first()->name ?? 'Has no role yet' }}</td>
                             <td>
                                 <a href="{{ route('admin.user.status.update', $user->id) }}"
                                     class="btn btn-{{ $user->status == 1 ? 'success' : 'danger' }} btn-round">{{ $user->status == 1 ? 'Active' : 'Inactive' }}</a>
                             </td>
-                            <td>{{ $user->roles->first()->name ?? 'Has no role yet' }}</td>
                             <td>
                                 <a href="{{ route('admin.user.edit', $user->id) }}"
                                     class="btn btn-warning btn-round">Edit</a>
@@ -56,6 +56,9 @@
                             </td>
                         </tr>
                     @empty
+                    <tr>
+                        <td colspan="7" style="color: grey;" align="center"></td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>
