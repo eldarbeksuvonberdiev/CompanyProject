@@ -36,7 +36,10 @@
                         <tr>
                             <td>{{ $role->id }}</td>
                             <td>{{ ucfirst($role->name) }}</td>
-                            <td>{{ $role->status }}</td>
+                            <td>
+                                <a href="{{ route('admin.role.status.update', $role->id) }}"
+                                    class="btn btn-{{ $role->status == 1 ? 'success' : 'danger' }} btn-round">{{ $role->status == 1 ? 'Active' : 'Inactive' }}</a>
+                            </td>
                             <td>
                                 <a href="{{ route('admin.role.edit', $role->id) }}"
                                     class="btn btn-warning btn-round">Edit</a>

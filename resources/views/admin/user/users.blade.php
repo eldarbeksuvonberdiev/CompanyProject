@@ -39,7 +39,10 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->status }}</td>
+                            <td>
+                                <a href="{{ route('admin.user.status.update', $user->id) }}"
+                                    class="btn btn-{{ $user->status == 1 ? 'success' : 'danger' }} btn-round">{{ $user->status == 1 ? 'Active' : 'Inactive' }}</a>
+                            </td>
                             <td>{{ $user->roles->first()->name ?? 'Has no role yet' }}</td>
                             <td>
                                 <a href="{{ route('admin.user.edit', $user->id) }}"

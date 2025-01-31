@@ -10,7 +10,13 @@ Route::get('/', function () {
 })->name('main');
 
 Route::prefix('admin')->name('admin.')->group(function () {
+
     Route::resource('/user', UserController::class);
+    Route::get('/user/{user}/status/edit', [UserController::class, 'status'])->name('user.status.update');
+
     Route::resource('/role', RoleController::class);
+    Route::get('/role/{role}/status/edit', [RoleController::class, 'status'])->name('role.status.update');
+
     Route::get('/permission-group', [PermissionGroupController::class, 'index'])->name('permission.index');
+    Route::get('/permission-group/{permissionGroup}/edit', [PermissionGroupController::class, 'edit'])->name('permission.edit');
 });

@@ -44,9 +44,17 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Role $role)
+    public function status(Role $role)
     {
-        //
+        if ($role->status == 1) {
+            $role->update(['status' => 0]);
+        } else {
+            $role->update(['status' => 1]);
+        }
+        return back()->with([
+            'status' => 'success',
+            'message' => "$role->name status has been changed!"
+        ]);
     }
 
     /**

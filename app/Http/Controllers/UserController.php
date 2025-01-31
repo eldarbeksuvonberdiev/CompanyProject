@@ -43,9 +43,17 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function status(User $user)
     {
-        //
+        if ($user->status == 1) {
+            $user->update(['status' => 0]);
+        } else {
+            $user->update(['status' => 1]);
+        }
+        return back()->with([
+            'status' => 'success',
+            'message' => "$user->name status has been changed!"
+        ]);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PermissionGroup;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class PermissionGroupController extends Controller
 {
@@ -13,6 +14,11 @@ class PermissionGroupController extends Controller
      */
     public function index()
     {
+        // $response = Http::get('https://cbu.uz/uz/arkhiv-kursov-valyut/json/');
+        // if ($response->successful()) {
+        //     $data = $response->json();
+        //     dd($data);
+        // }
         $permissionGroups = PermissionGroup::with('permissions')->get();
         return view('admin.permissionGroup.permission-group', compact('permissionGroups'));
     }
@@ -46,7 +52,15 @@ class PermissionGroupController extends Controller
      */
     public function edit(PermissionGroup $permissionGroup)
     {
-        //
+        if ($permissionGroup->status == 1) {
+            $permissionGroup->update(['status' => 0]);
+        } else {
+            $permissionGroup->update(['status' => 1]);
+        }
+        return back()->with([
+            'status' => 'success',
+            'message' => "$permissionGroup->name status has been changed!"
+        ]);
     }
 
     /**
