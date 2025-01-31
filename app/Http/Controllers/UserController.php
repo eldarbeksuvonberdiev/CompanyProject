@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequests\UserStoreRequest;
+use App\Http\Requests\UserRequests\UserUpdateRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with('roles')->get();
         return view('admin.user.users', compact('users'));
     }
 
@@ -28,9 +31,13 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $userStoreRequest)
     {
-        //
+        $user = User::create($userStoreRequest->validated());
+        return redirect()->route('admin.user.index')->with([
+            'status' => 'success',
+            'message' => "$user->name user has been successfully created"
+        ]);
     }
 
     /**
@@ -46,15 +53,28 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $userUpdateRequest, User $user)
     {
-        //
+        $validatedData = $userUpdateRequest->validated();
+
+        if (empty($validatedData['password'])) {
+            unset($validatedData['password']);
+        } else {
+            $validatedData['password'] = Hash::make($validatedData['password']);
+        }
+
+        $user->update($validatedData);
+
+        return redirect()->route('admin.user.index')->with([
+            'status' => 'success',
+            'message' => 'User has been successfully updated'
+        ]);
     }
 
     /**
@@ -62,6 +82,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $name = $user->name;
+        $user->delete();
+
+        return redirect()->route('admin.user.index')->with([
+            'status' => 'danger',
+            'message' => "$name user has been successfully deleted"
+        ]);
     }
 }

@@ -8,6 +8,8 @@ use App\Http\Requests\RoleRequests\RoleStoreRequest;
 use App\Http\Requests\RoleRequests\RoleUpdateRequest;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\returnSelf;
+
 class RoleController extends Controller
 {
     /**
@@ -32,8 +34,8 @@ class RoleController extends Controller
      */
     public function store(RoleStoreRequest $roleStoreRequest)
     {
-        $role = Role::create($roleStoreRequest);
-        return back()->with([
+        $role = Role::create($roleStoreRequest->validated());
+        return redirect()->route('admin.role.index')->with([
             'status' => 'success',
             'message' => "$role->name role has been successfully created"
         ]);
@@ -62,8 +64,8 @@ class RoleController extends Controller
     {
         $role->update($roleUpdateRequest->validated());
         return redirect()->route('admin.role.index')->with([
-            'status' => 'success',
-            'message' => "$role->name role has been successfully created"
+            'status' => 'warning',
+            'message' => "$role->name role has been successfully updated"
         ]);
     }
 

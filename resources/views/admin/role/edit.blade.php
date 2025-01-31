@@ -1,13 +1,13 @@
 @extends('main.main')
 
-@section('title', 'Role Create')
+@section('title', 'Role Edit')
 
 @section('content')
     <div class="container">
         <div class="page-inner">
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                 <div>
-                    <h3 class="fw-bold mb-3">Role Creation</h3>
+                    <h3 class="fw-bold mb-3">Role Edit</h3>
                 </div>
                 <div class="ms-md-auto py-2 py-md-0">
                     <a href="{{ route('admin.role.index') }}" class="btn btn-primary btn-round">Back</a>
