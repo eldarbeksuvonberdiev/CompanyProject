@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoleRequests\RoleStoreRequest;
+use App\Http\Requests\RoleRequests\RoleUpdateRequest;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -13,7 +15,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('main.main');
+        $roles = Role::all();
+        return view('admin.role.role', compact('roles'));
     }
 
     /**
@@ -21,15 +24,19 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.role.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RoleStoreRequest $roleStoreRequest)
     {
-        //
+        $role = Role::create($roleStoreRequest);
+        return back()->with([
+            'status' => 'success',
+            'message' => "$role->name role has been successfully created"
+        ]);
     }
 
     /**
@@ -45,15 +52,19 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return  view('admin.role.edit', compact('role'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleUpdateRequest $roleUpdateRequest, Role $role)
     {
-        //
+        $role->update($roleUpdateRequest->validated());
+        return redirect()->route('admin.role.index')->with([
+            'status' => 'success',
+            'message' => "$role->name role has been successfully created"
+        ]);
     }
 
     /**
@@ -61,6 +72,11 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $name = ucfirst($role->name);
+        $role->delete();
+        return back()->with([
+            'status' => 'danger',
+            'message' => "$name role has been successfully deleted"
+        ]);
     }
 }
