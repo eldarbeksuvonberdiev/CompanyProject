@@ -387,6 +387,17 @@
             </footer>
         </div>
     </div>
+    <script>
+        document.querySelectorAll('.group-checkbox').forEach(groupCheckbox => {
+            groupCheckbox.addEventListener('change', function() {
+                const groupId = this.dataset.group;
+                document.querySelectorAll(`.permission-checkbox[data-group="${groupId}"]`)
+                    .forEach(permissionCheckbox => {
+                        permissionCheckbox.checked = this.checked;
+                    });
+            });
+        });
+    </script>
     <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>

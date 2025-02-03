@@ -12,4 +12,9 @@ class Permission extends Model
         'path',
         'status',
     ];
+
+    public function group()
+    {
+        return $this->belongsTo(PermissionGroup::class);
+    }
 }

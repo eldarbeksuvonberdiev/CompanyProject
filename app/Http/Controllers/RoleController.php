@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequests\RoleStoreRequest;
 use App\Http\Requests\RoleRequests\RoleUpdateRequest;
+use App\Models\PermissionGroup;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\returnSelf;
@@ -26,7 +27,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.role.create');
+        $permissionGroups = PermissionGroup::with('permissions')->get();
+        return view('admin.role.create', compact('permissionGroups'));
     }
 
     /**
@@ -34,7 +36,10 @@ class RoleController extends Controller
      */
     public function store(RoleStoreRequest $roleStoreRequest)
     {
-        $role = Role::create($roleStoreRequest->validated());
+        // dd($roleStoreRequest->validated());
+        $role = Role::create(['name' => $roleStoreRequest->name]);
+        $role->permissions()->sync($roleStoreRequest->permissions ?? []);
+
         return redirect()->route('admin.role.index')->with([
             'status' => 'success',
             'message' => "$role->name role has been successfully created"
@@ -62,7 +67,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return  view('admin.role.edit', compact('role'));
+        $permissionGroups = PermissionGroup::with('permissions')->get();
+        return  view('admin.role.edit', compact('role', 'permissionGroups'));
     }
 
     /**
@@ -70,7 +76,10 @@ class RoleController extends Controller
      */
     public function update(RoleUpdateRequest $roleUpdateRequest, Role $role)
     {
-        $role->update($roleUpdateRequest->validated());
+        $role->update(['name' => $roleUpdateRequest->name]);
+
+        $role->permissions()->sync($roleUpdateRequest->permissions ?? []);
+
         return redirect()->route('admin.role.index')->with([
             'status' => 'warning',
             'message' => "$role->name role has been successfully updated"

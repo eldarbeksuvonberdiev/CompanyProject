@@ -74,5 +74,6 @@ class DatabaseSeeder extends Seeder
         $role5->permissions()->attach($permissions);
         $role6->permissions()->attach($permissions);
         $role7->permissions()->attach($permissions);
+        $role8->permissions()->attach($permissions);
     }
 }

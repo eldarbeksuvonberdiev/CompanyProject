@@ -26,6 +26,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Permissions</th>
                         <th>Status</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -36,6 +37,9 @@
                         <tr>
                             <td>{{ $role->id }}</td>
                             <td>{{ ucfirst($role->name) }}</td>
+                            <td>
+                                <button class="btn btn-secondary btn-round">{{ count($role->permissions) }}</button>
+                            </td>
                             <td>
                                 <a href="{{ route('admin.role.status.update', $role->id) }}"
                                     class="btn btn-{{ $role->status == 1 ? 'success' : 'danger' }} btn-round">{{ $role->status == 1 ? 'Active' : 'Inactive' }}</a>
