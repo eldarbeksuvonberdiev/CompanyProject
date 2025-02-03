@@ -38,42 +38,42 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user->roles()->attach($role1->id);
-        $roles = Role::all();
-        for ($i = 1; $i <= 7; $i++) {
-            $user = User::create([
-                'name' => $roles[$i]->name,
-                'email' => $roles[$i]->name . '@gmail.com',
-                'password' => Hash::make(123456)
-            ]);
-            $user->roles()->attach($roles[$i]->id);
-        }
+        // $roles = Role::all();
+        // for ($i = 1; $i <= 7; $i++) {
+        //     $user = User::create([
+        //         'name' => $roles[$i]->name,
+        //         'email' => $roles[$i]->name . '@gmail.com',
+        //         'password' => Hash::make(123456)
+        //     ]);
+        //     $user->roles()->attach($roles[$i]->id);
+        // }
 
-        $routes = Route::getRoutes();
-        foreach ($routes as $route) {
-            $key = $route->getName();
+        // $routes = Route::getRoutes();
+        // foreach ($routes as $route) {
+        //     $key = $route->getName();
 
 
-            if ($key && $key !== 'storage.local') {
-                $key1 = $key;
-                $groupName = explode('.', $key1)[0];
-                $group = PermissionGroup::firstOrCreate(['name' => $groupName]);
-                $name = ucfirst(str_replace('.', '-', $key));
-                Permission::create([
-                    'permission_group_id' => $group->id,
-                    'path' => $key,
-                    'name' => $name,
-                ]);
-            }
-        }
-        $permissions = Permission::pluck('id')->toArray();
+        //     if ($key && $key !== 'storage.local') {
+        //         $key1 = $key;
+        //         $groupName = explode('.', $key1)[0];
+        //         $group = PermissionGroup::firstOrCreate(['name' => $groupName]);
+        //         $name = ucfirst(str_replace('.', '-', $key));
+        //         Permission::create([
+        //             'permission_group_id' => $group->id,
+        //             'path' => $key,
+        //             'name' => $name,
+        //         ]);
+        //     }
+        // }
+        // $permissions = Permission::pluck('id')->toArray();
 
-        $role1->permissions()->attach($permissions);
-        $role2->permissions()->attach($permissions);
-        $role3->permissions()->attach($permissions);
-        $role4->permissions()->attach($permissions);
-        $role5->permissions()->attach($permissions);
-        $role6->permissions()->attach($permissions);
-        $role7->permissions()->attach($permissions);
-        $role8->permissions()->attach($permissions);
+        // $role1->permissions()->attach($permissions);
+        // $role2->permissions()->attach($permissions);
+        // $role3->permissions()->attach($permissions);
+        // $role4->permissions()->attach($permissions);
+        // $role5->permissions()->attach($permissions);
+        // $role6->permissions()->attach($permissions);
+        // $role7->permissions()->attach($permissions);
+        // $role8->permissions()->attach($permissions);
     }
 }
