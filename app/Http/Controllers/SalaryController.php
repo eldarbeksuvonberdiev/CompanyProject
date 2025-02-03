@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
-use App\Http\Controllers\Controller;
 use App\Models\Salary;
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
+class SalaryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $employees = Employee::with('users')->get();
-        return view('hr.employee.index', compact('employees'));
+        //
     }
 
     /**
@@ -24,10 +21,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $users = User::doesntHave('employee')->get();
-        $salaries = Salary::all();
-        // $salaries = [];
-        return view('hr.employee.create', compact('users', 'salaries'));
+        //
     }
 
     /**
@@ -41,7 +35,7 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Employee $employee)
+    public function show(Salary $salary)
     {
         //
     }
@@ -49,15 +43,15 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Employee $employee)
+    public function edit(Salary $salary)
     {
-        dd($employee);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, Salary $salary)
     {
         //
     }
@@ -65,8 +59,8 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Employee $employee)
+    public function destroy(Salary $salary)
     {
-        dd($employee);
+        //
     }
 }
