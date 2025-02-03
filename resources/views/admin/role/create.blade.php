@@ -42,7 +42,7 @@
                                     </label>
                                 </div>
                             @endforeach
-                        </div>
+                        </div><hr>
                     @endforeach
                 </div>
                 <div class="ms-md-auto py-2 py-md-0" align='right'>

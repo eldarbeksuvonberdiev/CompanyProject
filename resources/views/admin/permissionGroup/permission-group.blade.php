@@ -33,18 +33,11 @@
                             <td>{{ $permissionGroup->id }}</td>
                             <td>{{ ucfirst($permissionGroup->name) }}</td>
                             <td>
-                                <button
-                                    class="btn btn-secondary btn-round">{{ count($permissionGroup->permissions) }}</button>
+                                <a href="{{ route('admin.permission.permissions', $permissionGroup->id) }}"
+                                    class="btn btn-secondary btn-round">{{ count($permissionGroup->permissions) }}</a>
                             </td>
-                            {{-- <td>
-                                @forelse ($permissionGroup->permissions as $permission)
-                                    <li>{{ $permission->name }}</li>
-                                @empty
-                                    Has no permissions yet
-                                @endforelse
-                            </td> --}}
                             <td>
-                                <a href="{{ route('admin.permission.edit', $permissionGroup->id) }}"
+                                <a href="{{ route('admin.permissionGroup.edit', $permissionGroup->id) }}"
                                     class="btn btn-{{ $permissionGroup->status == 1 ? 'success' : 'danger' }} btn-round">{{ $permissionGroup->status == 1 ? 'Active' : 'Inactive' }}</a>
                             </td>
                         </tr>

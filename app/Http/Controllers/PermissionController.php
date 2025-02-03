@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Permission;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PermissionRequests\PermissionUpdateRequest;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -35,9 +36,17 @@ class PermissionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Permission $permission)
+    public function status(Permission $permission)
     {
-        //
+        if ($permission->status == 1) {
+            $permission->update(['status' => 0]);
+        } else {
+            $permission->update(['status' => 1]);
+        }
+        return back()->with([
+            'status' => 'success',
+            'message' => "$permission->name status has been changed!"
+        ]);
     }
 
     /**
@@ -51,9 +60,14 @@ class PermissionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Permission $permission)
+    public function update(PermissionUpdateRequest $permissionUpdateRequest, Permission $permission)
     {
-        //
+        $permission->update($permissionUpdateRequest->validated());
+
+        return back()->with([
+            'status' => 'success',
+            'message' => "$permission->name name has been changed!"
+        ]);
     }
 
     /**

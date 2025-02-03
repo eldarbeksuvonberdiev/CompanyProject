@@ -81,7 +81,7 @@
                                         <a href="{{ route('admin.role.index') }}">
                                             <span class="sub-item">Roles</span>
                                         </a>
-                                        <a href="{{ route('admin.permission.index') }}">
+                                        <a href="{{ route('admin.permissionGroup.index') }}">
                                             <span class="sub-item">Permission Groups</span>
                                         </a>
                                     </li>

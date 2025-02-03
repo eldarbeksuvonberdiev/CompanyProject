@@ -48,6 +48,7 @@
                             @endforeach
                         </div>
                     </div>
+                    <hr style="width: 75%;margin: 20px auto;border: 1px solid #000;">
                 @endforeach
                 <div class="ms-md-auto py-2 py-md-0" align='right'>
                     <button type="submimt" class="btn btn-primary btn-round">Update</button>

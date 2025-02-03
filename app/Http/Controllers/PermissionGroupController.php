@@ -26,9 +26,11 @@ class PermissionGroupController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function permissions(PermissionGroup $permissionGroup)
     {
-        //
+        $permissions = $permissionGroup->permissions()->get();
+        // dd($permissionGroup, $permissions);
+        return view('admin.permissionGroup.permission', compact('permissionGroup', 'permissions'));
     }
 
     /**
