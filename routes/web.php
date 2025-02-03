@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PermissionGroupController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -19,4 +20,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/permission-group', [PermissionGroupController::class, 'index'])->name('permission.index');
     Route::get('/permission-group/{permissionGroup}/edit', [PermissionGroupController::class, 'edit'])->name('permission.edit');
+});
+
+Route::prefix('hr')->name('hr.')->group(function () {
+    Route::resource('/employee', EmployeeController::class);
 });

@@ -54,8 +54,10 @@ class PermissionGroupController extends Controller
     {
         if ($permissionGroup->status == 1) {
             $permissionGroup->update(['status' => 0]);
+            $permissionGroup->permissions()->update(['status' => 0]);
         } else {
             $permissionGroup->update(['status' => 1]);
+            $permissionGroup->permissions()->update(['status' => 1]);
         }
         return back()->with([
             'status' => 'success',
