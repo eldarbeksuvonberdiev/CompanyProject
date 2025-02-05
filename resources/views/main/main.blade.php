@@ -106,6 +106,11 @@
                                             <span class="sub-item">Salary</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('hr.warehouse.index') }}">
+                                            <span class="sub-item">Warehouses</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>

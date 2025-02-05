@@ -6,6 +6,7 @@ use App\Http\Controllers\PermissionGroupController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WarehouseController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,4 +32,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('hr')->name('hr.')->group(function () {
     Route::resource('/employee', EmployeeController::class);
     Route::resource('/salary', SalaryController::class);
+    Route::resource('/warehouse', WarehouseController::class);
+    Route::get('/warehouse-status/{warehouse}', [WarehouseController::class,'status'])->name('warehouse.status');
 });
