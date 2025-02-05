@@ -1,13 +1,13 @@
 @extends('main.main')
 
-@section('title', 'Employee Create')
+@section('title', 'Employee Edit')
 
 @section('content')
     <div class="container">
         <div class="page-inner">
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                 <div>
-                    <h3 class="fw-bold mb-3">Employee Create</h3>
+                    <h3 class="fw-bold mb-3">Employee Edit</h3>
                 </div>
                 <div class="ms-md-auto py-2 py-md-0">
                     <a href="{{ route('hr.employee.index') }}" class="btn btn-primary btn-round">Back</a>
@@ -15,8 +15,8 @@
             </div>
         </div>
         <div class="page-inner">
-            <form action="{{ route('hr.employee.store') }}" method="post">
-                @csrf
+            <form action="{{ route('hr.employee.update', $employee->id) }}" method="post">
+                @csrf @method('PUT')
                 <div class="row">
                     <div class="col-6">
                         <div>
@@ -24,7 +24,7 @@
                                     <h5>Name</h5>
                                 </strong></label>
                             <input type="text" name="name" id="name" class="form-control mb-3"
-                                placeholder="Employee name">
+                                value="{{ $employee->name }}">
                             @error('name')
                                 <div class="text-danger">
                                     {{ $message }}
@@ -36,7 +36,7 @@
                                     <h5>Surname</h5>
                                 </strong></label>
                             <input type="text" name="surname" id="surname" class="form-control mb-3"
-                                placeholder="Employee surname">
+                                value="{{ $employee->surname }}">
                             @error('surname')
                                 <div class="text-danger">
                                     {{ $message }}
@@ -48,7 +48,7 @@
                                     <h5>Father's name</h5>
                                 </strong></label>
                             <input type="text" name="father_name" id="father_name" class="form-control mb-3"
-                                placeholder="Employee father's name">
+                                value="{{ $employee->father_name }}">
                             @error('father_name')
                                 <div class="text-danger">
                                     {{ $message }}
@@ -62,7 +62,9 @@
                             <select class="form-control" aria-label="Default select example">
                                 <option></option>
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    <option value="{{ $user->id }}"
+                                        {{ $employee->user_id == $user->id ? 'selected' : '' }}>{{ $user->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('user_id')
@@ -78,7 +80,7 @@
                                     <h5>Phone</h5>
                                 </strong></label>
                             <input type="integer" name="phone" id="phone" class="form-control mb-3"
-                                placeholder="998 ...">
+                            value="{{ $employee->phone }}">
                             @error('phone')
                                 <div class="text-danger">
                                     {{ $message }}
@@ -90,7 +92,7 @@
                                     <h5>Address</h5>
                                 </strong></label>
                             <input type="text" name="address" id="address" class="form-control mb-3"
-                                placeholder="User email">
+                            value="{{ $employee->address }}">
                             @error('address')
                                 <div class="text-danger">
                                     {{ $message }}
@@ -102,7 +104,7 @@
                                 <label for="start_time" class="mb-2"><strong>
                                         <h5>Work start time</h5>
                                     </strong></label>
-                                <input type="time" name="start_time" id="start_time" class="form-control mb-3">
+                                <input type="time" name="start_time" id="start_time" class="form-control mb-3" value="{{ $employee->start_time }}">
                                 @error('start_time')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -113,7 +115,7 @@
                                 <label for="end_time" class="mb-2"><strong>
                                         <h5>Work end time</h5>
                                     </strong></label>
-                                <input type="time" name="end_time" id="end_time" class="form-control mb-3">
+                                <input type="time" name="end_time" id="end_time" class="form-control mb-3" value="{{ $employee->end_time }}">
                                 @error('end_time')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -129,7 +131,9 @@
                                 name="salary_id">
                                 <option></option>
                                 @foreach ($salaries as $salary)
-                                    <option value="{{ $salary->id }}">{{ $salary->name }}</option>
+                                    <option value="{{ $salary->id }}"
+                                        {{ $employee->salary_id == $salary->id ? 'selected' : '' }}>{{ $salary->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('salary_id')

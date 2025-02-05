@@ -12,7 +12,7 @@ class Employee extends Model
         'name',
         'surname',
         'father_name',
-        'phone_number',
+        'phone',
         'address',
         'start_time',
         'end_time',
@@ -21,5 +21,10 @@ class Employee extends Model
     public function users()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function salary()
+    {
+        return $this->belongsTo(Salary::class);
     }
 }

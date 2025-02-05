@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EmployeeRequests\EmployeeStoreRequest;
+use App\Http\Requests\EmployeeRequests\EmployeeUpdateRequest;
 use App\Models\Salary;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,9 +35,14 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EmployeeStoreRequest $employeeStoreRequest)
     {
-        //
+        $employee = Employee::create($employeeStoreRequest->validated());
+
+        return redirect()->route('hr.employee.index')->with([
+            'status' => 'success',
+            'message' => "$employee->name employee has been successfully created"
+        ]);
     }
 
     /**
@@ -51,15 +58,22 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        dd($employee);
+        $users = User::doesntHave('employee')->get();
+        $salaries = Salary::all();
+        return view('hr.employee.edit', compact('employee', 'users','salaries'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Employee $employee)
+    public function update(EmployeeUpdateRequest $employeeUpdateRequest, Employee $employee)
     {
-        //
+        $employee->update($employeeUpdateRequest->validated());
+
+        return redirect()->route('hr.employee.index')->with([
+            'status' => 'success',
+            'message' => "$employee->name employee has been successfully updated"
+        ]);
     }
 
     /**
@@ -67,6 +81,10 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        dd($employee);
+        $employee->delete();
+        return back()->with([
+            'status' => 'success',
+            'message' => "Employee has been successfully deleted"
+        ]);
     }
 }

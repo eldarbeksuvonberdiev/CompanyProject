@@ -41,10 +41,10 @@
                             <td>Name: {{ $employee->name }} <br>Surname: {{ $employee->surname }}
                                 <br>Father's name: {{ $employee->father_name }}
                             </td>
-                            <td>{{ $employee->phone_number }}</td>
+                            <td>{{ $employee->phone }}</td>
                             <td>{{ $employee->address }}</td>
                             <td>{{ $employee->start_time }} <br> {{ $employee->end_time }}</td>
-                            <td>{{ number_format($employee->salary) }}</td>
+                            <td>{{ $employee->salary->name }}</td>
                             <td>
                                 <a href="{{ route('hr.employee.edit', $employee->id) }}"
                                     class="btn btn-warning btn-round">Edit</a>
