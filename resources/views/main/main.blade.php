@@ -101,6 +101,11 @@
                                             <span class="sub-item">Employees</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('hr.salary.index') }}">
+                                            <span class="sub-item">Salary</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>

@@ -4,6 +4,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionGroupController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +30,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 Route::prefix('hr')->name('hr.')->group(function () {
     Route::resource('/employee', EmployeeController::class);
+    Route::resource('/salary', SalaryController::class);
 });
