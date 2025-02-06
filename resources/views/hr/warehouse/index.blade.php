@@ -39,7 +39,8 @@
                             <td>{{ ucfirst($warehouse->name) }}</td>
                             <td>{{ $warehouse->user->name }}</td>
                             <td>
-                                <a href="{{ route('hr.warehouse.status', $warehouse->id) }}" class="btn btn-">Status</a>
+                                <a href="{{ route('hr.warehouse.status', $warehouse->id) }}"
+                                    class="btn btn-{{ $warehouse->status == 1 ? 'success' : 'danger' }} btn-round">{{ $warehouse->status == '1' ? 'Active' : 'Inactive' }}</a>
                             </td>
                             <td>
                                 <a href="{{ route('hr.warehouse.edit', $warehouse->id) }}"
