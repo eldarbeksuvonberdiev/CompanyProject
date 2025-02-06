@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('warehouse_materials', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('warehouse_id')->constrained('warehouses')->cascadeOnDelete();
+            $table->foreignId('material_id')->constrained('materials')->cascadeOnDelete();
+            $table->double('value');
             $table->timestamps();
         });
     }

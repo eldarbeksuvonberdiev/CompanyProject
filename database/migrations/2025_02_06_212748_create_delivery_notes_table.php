@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('delivery_notes', function (Blueprint $table) {
             $table->id();
+            $table->string('company_name');
+            $table->date('date');
+            $table->string('text')->nullable();
             $table->timestamps();
         });
     }

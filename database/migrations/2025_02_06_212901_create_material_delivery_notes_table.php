@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('material_delivery_notes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('material_id')->constrained('materials')->cascadeOnDelete();
+            $table->foreignId('delivery_note_id')->constrained('delivery_notes')->cascadeOnDelete();
+            $table->string('unit');
+            $table->double('amount');
+            $table->double('price');
+            $table->double('summ');
             $table->timestamps();
         });
     }
