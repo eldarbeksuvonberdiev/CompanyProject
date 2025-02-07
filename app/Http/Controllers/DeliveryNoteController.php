@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\DeliveryNote;
 use App\Http\Controllers\Controller;
+use App\Imports\DeliveryNoteImport;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DeliveryNoteController extends Controller
 {
@@ -23,7 +25,12 @@ class DeliveryNoteController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'warehouse_id' => 'required',
+            'file' => 'required'
+        ]);
+        $rows = Excel::toCollection(new DeliveryNoteImport, $request->file('file'));
+        dd($rows);
     }
 
     /**

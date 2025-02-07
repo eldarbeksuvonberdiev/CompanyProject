@@ -25,7 +25,7 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('warehouse.delivery-notes.store') }}" method="post">
+                                    <form action="{{ route('warehouse.delivery-notes.store') }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <div class="mt-2">
                                             <label for="Select warehouse" class="form-label">Select warehouse
@@ -36,19 +36,29 @@
                                                     <option value="{{ $warehouse->id }}">{{ $warehouse->name }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('warehouse_id')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="mt-2">
                                             <label for="file" class="form-label">Upload Excel file
                                                 here</label>
-                                            <input type="file" class="form-control" id="file"
-                                                aria-describedby="emailHelp" accept=".xls, .xlsx, .csv">
+                                            <input type="file" class="form-control" name="file" id="file"
+                                                accept=".xls, .xlsx, .csv">
+                                            @error('file')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary btn-round"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary btn-round">Save</button>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary btn-round"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary btn-round">Save</button>
                                 </div>
                             </div>
                         </div>
