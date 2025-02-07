@@ -32,14 +32,16 @@
                                                 btn-round</label>
                                             <select class="form-control" id="Select warehouse"
                                                 aria-label="Default select example" name="warehouse_id">
-                                                <option value="{{ $warehouse->id }}">{{ $warehouse->name }}</option>
+                                                @foreach ($warehouses as $warehouse)
+                                                    <option value="{{ $warehouse->id }}">{{ $warehouse->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="mt-2">
                                             <label for="file" class="form-label">Upload Excel file
                                                 here</label>
                                             <input type="file" class="form-control" id="file"
-                                                aria-describedby="emailHelp">
+                                                aria-describedby="emailHelp" accept=".xls, .xlsx, .csv">
                                         </div>
                                     </form>
                                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DeliveryNote;
 use App\Http\Controllers\Controller;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
 class DeliveryNoteController extends Controller
@@ -13,7 +14,8 @@ class DeliveryNoteController extends Controller
      */
     public function index()
     {
-        return view('warehouse.deliveryNotes.index');
+        $warehouses = Warehouse::all();
+        return view('warehouse.deliveryNotes.index', compact('warehouses'));
     }
 
     /**
@@ -21,7 +23,7 @@ class DeliveryNoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
