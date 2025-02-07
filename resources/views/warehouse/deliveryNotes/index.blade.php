@@ -25,11 +25,14 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" method="post">
+                                    <form action="{{ route('warehouse.delivery-notes.store') }}" method="post">
+                                        @csrf
                                         <div class="mt-2">
-                                            <label for="Select warehouse" class="form-label">Select warehouse  btn-round</label>
-                                            <select class="form-control" id="Select warehouse" aria-label="Default select example">
-                                                <option>menu</option>
+                                            <label for="Select warehouse" class="form-label">Select warehouse
+                                                btn-round</label>
+                                            <select class="form-control" id="Select warehouse"
+                                                aria-label="Default select example" name="warehouse_id">
+                                                <option value="{{ $warehouse->id }}">{{ $warehouse->name }}</option>
                                             </select>
                                         </div>
                                         <div class="mt-2">
@@ -41,7 +44,8 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary btn-round" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary btn-round"
+                                        data-bs-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-primary btn-round">Save</button>
                                 </div>
                             </div>
