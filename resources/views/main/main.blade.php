@@ -106,6 +106,22 @@
                                             <span class="sub-item">Salary</span>
                                         </a>
                                     </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item active">
+                            <a data-bs-toggle="collapse" href="#warehouse" class="collapsed" aria-expanded="false">
+                                <i class="fas fa-list"></i>
+                                <p>Warehouses</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="warehouse">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{{ route('warehouse.delivery-notes.index') }}">
+                                            <span class="sub-item">Delivery Notes</span>
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('hr.warehouse.index') }}">
                                             <span class="sub-item">Warehouses</span>

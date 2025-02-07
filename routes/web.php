@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionGroupController;
@@ -33,5 +34,9 @@ Route::prefix('hr')->name('hr.')->group(function () {
     Route::resource('/employee', EmployeeController::class);
     Route::resource('/salary', SalaryController::class);
     Route::resource('/warehouse', WarehouseController::class);
-    Route::get('/warehouse-status/{warehouse}', [WarehouseController::class,'status'])->name('warehouse.status');
+    Route::get('/warehouse-status/{warehouse}', [WarehouseController::class, 'status'])->name('warehouse.status');
+});
+
+Route::prefix('warehouse')->name('warehouse.')->group(function () {
+    Route::resource('/delivery-notes', DeliveryNoteController::class);
 });

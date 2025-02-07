@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('material_id')->constrained('materials')->cascadeOnDelete();
+            $table->tinyInteger('type');
+            $table->boolean('status');
+            $table->double('quantity');
+            $table->double('was');
+            $table->double('been');
+            $table->unsignedBigInteger('from_id');
+            $table->foreignId('to_id')->constrained('warehouses')->cascadeOnDelete();
             $table->timestamps();
         });
     }

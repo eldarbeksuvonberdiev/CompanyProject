@@ -13,7 +13,7 @@ class DeliveryNoteController extends Controller
      */
     public function index()
     {
-        //
+        return view('warehouse.deliveryNotes.index');
     }
 
     /**
