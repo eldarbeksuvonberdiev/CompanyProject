@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('material_id')->constrained('materials')->cascadeOnDelete();
             $table->tinyInteger('type');
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->double('quantity');
             $table->double('was');
             $table->double('been');

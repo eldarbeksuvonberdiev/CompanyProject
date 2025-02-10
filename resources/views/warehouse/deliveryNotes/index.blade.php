@@ -14,7 +14,6 @@
                         data-bs-target="#deliveryNote">
                         Add Delivery Note
                     </button>
-
                     <div class="modal fade" id="deliveryNote" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
@@ -25,11 +24,11 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('warehouse.delivery-notes.store') }}" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('warehouse.delivery-notes.store') }}" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="mt-2">
-                                            <label for="Select warehouse" class="form-label">Select warehouse
-                                                btn-round</label>
+                                            <label for="Select warehouse" class="form-label">Select warehouse</label>
                                             <select class="form-control" id="Select warehouse"
                                                 aria-label="Default select example" name="warehouse_id">
                                                 @foreach ($warehouses as $warehouse)
