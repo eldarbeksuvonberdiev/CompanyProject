@@ -121,6 +121,7 @@ class DeliveryNoteController extends Controller
     public function show(DeliveryNote $deliveryNote)
     {
         $deliveryNoteMaterials = $deliveryNote->load('materialDeliveryNotes');
+        // dd($deliveryNoteMaterials);
         return view('warehouse.deliveryNotes.show', compact('deliveryNoteMaterials', 'deliveryNote'));
     }
 }

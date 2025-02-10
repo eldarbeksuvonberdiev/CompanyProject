@@ -9,34 +9,44 @@
                 <div>
                     <h3 class="fw-bold mb-3">Delivery Notes {{ $deliveryNote->company_name }}</h3>
                 </div>
+                <div class="ms-md-auto py-2 py-md-0">
+                    <a href="{{ route('warehouse.delivery-notes.index') }}" class="btn btn-primary btn-round">Back</a>
+                </div>
             </div>
+            @if (session('status') && session('message'))
+                <div class="alert alert-{{ session('status') }} alert-dismissible fade show" role="alert">
+                    <strong>{{ session('message') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
         </div>
         <div class="page-inner">
             <table class="table table-hover table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Date</th>
-                        <th>Delivery Note Products</th>
+                        <th>Material name</th>
+                        <th>Deliery Note Company name</th>
+                        <th>Unit</th>
+                        <th>Amount</th>
+                        <th>Price</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @forelse ($deliveryNotes as $deliveryNote)
+                    @forelse ($deliveryNoteMaterials->materialDeliveryNotes as $deliveryNoteMaterial)
                         <tr>
-                            <td>{{ $deliveryNote->id }}</td>
-                            <td>{{ ucfirst($deliveryNote->company_name) }}</td>
-                            <td>{{ \Carbon\Carbon::parse($deliveryNote->date)->format('F d, Y') }}</td>
-                            <td>
-                                <a href="{{ route('warehouse.delivery-notes.show', $deliveryNote->id) }}"
-                                    class="btn btn-warning btn-round"><i class="bi bi-eye"></i> See</a>
-                            </td>
+                            <td>{{ $deliveryNoteMaterial->id }}</td>
+                            <td>{{ $deliveryNoteMaterial->material->name }}</td>
+                            <td>{{ $deliveryNote->company_name }}</td>
+                            <td>{{ $deliveryNoteMaterial->unit }}</td>
+                            <td>{{ $deliveryNoteMaterial->amount }}</td>
+                            <td>{{ $deliveryNoteMaterial->price }}</td>
                         </tr>
                     @empty
                         <tr>
                             <td colspan="5" style="text-align: center;color: grey;">You have no DeliveryNotes yet!</td>
                         </tr>
-                    @endforelse --}}
+                    @endforelse
                 </tbody>
             </table>
         </div>
