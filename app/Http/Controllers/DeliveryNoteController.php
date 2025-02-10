@@ -26,8 +26,9 @@ class DeliveryNoteController extends Controller
      */
     public function index()
     {
+        $deliveryNotes = DeliveryNote::all();
         $warehouses = Warehouse::all();
-        return view('warehouse.deliveryNotes.index', compact('warehouses'));
+        return view('warehouse.deliveryNotes.index', compact('deliveryNotes', 'warehouses'));
     }
 
     /**
@@ -119,6 +120,7 @@ class DeliveryNoteController extends Controller
      */
     public function show(DeliveryNote $deliveryNote)
     {
-        //
+        $deliveryNoteMaterials = $deliveryNote->load('materialDeliveryNotes');
+        return view('warehouse.deliveryNotes.show', compact('deliveryNoteMaterials', 'deliveryNote'));
     }
 }

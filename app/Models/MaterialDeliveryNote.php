@@ -14,4 +14,9 @@ class MaterialDeliveryNote extends Model
         'price',
         'summ',
     ];
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
+    }
 }

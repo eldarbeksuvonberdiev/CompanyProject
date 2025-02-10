@@ -77,31 +77,26 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Date</th>
+                        <th>Delivery Note Products</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @forelse ($salaries as $salary)
+                    @forelse ($deliveryNotes as $deliveryNote)
                         <tr>
-                            <td>{{ $salary->id }}</td>
-                            <td>{{ ucfirst($salary->name) }}</td>
+                            <td>{{ $deliveryNote->id }}</td>
+                            <td>{{ ucfirst($deliveryNote->company_name) }}</td>
+                            <td>{{ \Carbon\Carbon::parse($deliveryNote->date)->format('F d, Y') }}</td>
                             <td>
-                                <a href="{{ route('hr.salary.edit', $salary->id) }}"
-                                    class="btn btn-warning btn-round">Edit</a>
-                            </td>
-                            <td>
-                                <form action="{{ route('hr.salary.destroy', $salary->id) }}" method="post">
-                                    @csrf @method('DELETE')
-                                    <button class="btn btn-danger btn-round">Delete</button>
-                                </form>
+                                <a href="{{ route('warehouse.delivery-notes.show', $deliveryNote->id) }}"
+                                    class="btn btn-warning btn-round"><i class="bi bi-eye"></i> See</a>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" style="text-align: center;color: grey;">You have no salarys yet!</td>
+                            <td colspan="5" style="text-align: center;color: grey;">You have no DeliveryNotes yet!</td>
                         </tr>
-                    @endforelse --}}
+                    @endforelse
                 </tbody>
             </table>
         </div>
