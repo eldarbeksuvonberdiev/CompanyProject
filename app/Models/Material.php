@@ -10,4 +10,9 @@ class Material extends Model
         'name',
         'slug',
     ];
+
+    public function deliveryNoteMaterials()
+    {
+        return $this->hasMany(MaterialDeliveryNote::class);
+    }
 }

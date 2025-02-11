@@ -7,10 +7,10 @@
         <div class="page-inner">
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                 <div>
-                    <h3 class="fw-bold mb-3">Delivery Notes {{ $warehouse->name }}</h3>
+                    <h3 class="fw-bold mb-3">{{ $warehouse->name }} Products</h3>
                 </div>
                 <div class="ms-md-auto py-2 py-md-0">
-                    <a href="{{ route('warehouse.delivery-notes.index') }}" class="btn btn-primary btn-round">Back</a>
+                    <a href="{{ route('hr.warehouse.index') }}" class="btn btn-primary btn-round">Back</a>
                 </div>
             </div>
             @if (session('status') && session('message'))
@@ -26,27 +26,72 @@
                     <tr>
                         <th>#</th>
                         <th>Material name</th>
-                        <th>Deliery Note Company name</th>
                         <th>Unit</th>
                         <th>Amount</th>
                         <th>Price</th>
+                        <th>Transfer</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @forelse ($deliveryNoteMaterials->materialDeliveryNotes as $deliveryNoteMaterial)
+                    @forelse ($warehouse->warehouseMaterials as $warehouseMaterial)
                         <tr>
-                            <td>{{ $deliveryNoteMaterial->id }}</td>
-                            <td>{{ $deliveryNoteMaterial->material->name }}</td>
-                            <td>{{ $deliveryNote->company_name }}</td>
-                            <td>{{ $deliveryNoteMaterial->unit }}</td>
-                            <td>{{ $deliveryNoteMaterial->amount }}</td>
-                            <td>{{ $deliveryNoteMaterial->price }}</td>
+                            <td>{{ $warehouseMaterial->id }}</td>
+                            <td>{{ $warehouseMaterial->material->name }}</td>
+                            <td>{{ $warehouseMaterial->material->deliveryNoteMaterials->first()->unit }}</td>
+                            <td>{{ $warehouseMaterial->value }}</td>
+                            <td>{{ $warehouseMaterial->material->deliveryNoteMaterials->first()->price }}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-round" data-bs-toggle="modal"
+                                    data-bs-target="#transfer{{ $warehouseMaterial->id }}">
+                                    Transfer
+                                </button>
+                                <div class="modal fade" id="transfer{{ $warehouseMaterial->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Transfer</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form
+                                                    action="{{ route('warehouse.warehouseMaterial.transfer', $warehouseMaterial->id) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    <div class="">
+                                                        <select class="form-control" name="to_id"
+                                                            aria-label="Default select example">
+                                                            @foreach ($warehouses as $warehousee)
+                                                                <option value="{{ $warehousee->id }}">
+                                                                    {{ $warehousee->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="">
+                                                        <input type="number" name="amount" class="form-control mt-3"
+                                                            placeholder="Enter the amount"
+                                                            max="{{ (int) $warehouseMaterial->value }}" min="0">
+                                                        <input type="hidden" name="from_id" value="{{ $warehouse->id }}">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary btn-round"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary btn-round">Save
+                                                            changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" style="text-align: center;color: grey;">You have no DeliveryNotes yet!</td>
+                            <td colspan="6" style="text-align: center;color: grey;">You have no products yet!</td>
                         </tr>
-                    @endforelse --}}
+                    @endforelse
                 </tbody>
             </table>
         </div>

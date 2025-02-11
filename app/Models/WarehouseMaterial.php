@@ -11,4 +11,9 @@ class WarehouseMaterial extends Model
         'material_id',
         'value',
     ];
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
+    }
 }

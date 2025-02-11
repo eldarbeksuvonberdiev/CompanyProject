@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\WarehouseMaterialController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,4 +41,5 @@ Route::prefix('hr')->name('hr.')->group(function () {
 
 Route::prefix('warehouse')->name('warehouse.')->group(function () {
     Route::resource('/delivery-notes', DeliveryNoteController::class);
+    Route::post('/warehouse-transfer/{warehouseMaterial}', [WarehouseMaterialController::class,'transfer'])->name('warehouseMaterial.transfer');
 });

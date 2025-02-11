@@ -45,7 +45,7 @@ class WarehouseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function status(Warehouse $warehouse) 
+    public function status(Warehouse $warehouse)
     {
         if ($warehouse->status == 1) {
             $warehouse->update(['status' => 0]);
@@ -93,7 +93,7 @@ class WarehouseController extends Controller
 
     public function products(Warehouse $warehouse)
     {
-        $warehouseMaterials = $warehouse->load('warehouseMaterials');
-        return view('hr.warehouse.products', compact('warehouse', 'warehouseMaterials'));
+        $warehouses = Warehouse::where('id', '!=', $warehouse->id)->get();
+        return view('hr.warehouse.products', compact('warehouse', 'warehouses'));
     }
 }
