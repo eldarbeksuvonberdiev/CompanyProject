@@ -94,7 +94,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" style="text-align: center;color: grey;">You have no DeliveryNotes yet!</td>
+                            <td colspan="5" style="text-align: center;color: grey;">You have no Delivery Notes yet!</td>
                         </tr>
                     @endforelse
                 </tbody>

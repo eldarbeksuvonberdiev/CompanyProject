@@ -35,6 +35,7 @@ Route::prefix('hr')->name('hr.')->group(function () {
     Route::resource('/salary', SalaryController::class);
     Route::resource('/warehouse', WarehouseController::class);
     Route::get('/warehouse-status/{warehouse}', [WarehouseController::class, 'status'])->name('warehouse.status');
+    Route::get('/warehouse-products/{warehouse}', [WarehouseController::class, 'products'])->name('warehouse.products');
 });
 
 Route::prefix('warehouse')->name('warehouse.')->group(function () {

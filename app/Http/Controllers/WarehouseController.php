@@ -90,4 +90,10 @@ class WarehouseController extends Controller
             'message' => 'Warehouse has been successfully deleted!',
         ]);
     }
+
+    public function products(Warehouse $warehouse)
+    {
+        $warehouseMaterials = $warehouse->load('warehouseMaterials');
+        return view('hr.warehouse.products', compact('warehouse', 'warehouseMaterials'));
+    }
 }

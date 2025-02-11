@@ -26,8 +26,9 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Status</th>
                         <th>User</th>
+                        <th>Status</th>
+                        <th>Products</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -41,6 +42,10 @@
                             <td>
                                 <a href="{{ route('hr.warehouse.status', $warehouse->id) }}"
                                     class="btn btn-{{ $warehouse->status == 1 ? 'success' : 'danger' }} btn-round">{{ $warehouse->status == '1' ? 'Active' : 'Inactive' }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ route('hr.warehouse.products', $warehouse->id) }}"
+                                    class="btn btn-{{ $warehouse->status == 1 ? 'success' : 'danger' }} btn-round">{{ count($warehouse->warehouseMaterials) }}</a>
                             </td>
                             <td>
                                 <a href="{{ route('hr.warehouse.edit', $warehouse->id) }}"
