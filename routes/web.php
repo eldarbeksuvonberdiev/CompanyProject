@@ -41,5 +41,5 @@ Route::prefix('hr')->name('hr.')->group(function () {
 
 Route::prefix('warehouse')->name('warehouse.')->group(function () {
     Route::resource('/delivery-notes', DeliveryNoteController::class);
-    Route::post('/warehouse-transfer/{warehouseMaterial}', [WarehouseMaterialController::class,'transfer'])->name('warehouseMaterial.transfer');
+    Route::post('/warehouse-transfer/{material}', [WarehouseMaterialController::class,'transfer'])->name('warehouseMaterial.transfer');
 });

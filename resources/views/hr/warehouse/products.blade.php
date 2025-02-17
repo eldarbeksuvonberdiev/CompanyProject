@@ -38,7 +38,7 @@
                             <td>{{ $warehouseMaterial->id }}</td>
                             <td>{{ $warehouseMaterial->material->name }}</td>
                             <td>{{ $warehouseMaterial->material->deliveryNoteMaterials->first()->unit }}</td>
-                            <td>{{ $warehouseMaterial->value }}</td>
+                            <td>{{ number_format($warehouseMaterial->value) }}</td>
                             <td>{{ $warehouseMaterial->material->deliveryNoteMaterials->first()->price }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-round" data-bs-toggle="modal"
@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form
-                                                    action="{{ route('warehouse.warehouseMaterial.transfer', $warehouseMaterial->id) }}"
+                                                    action="{{ route('warehouse.warehouseMaterial.transfer', $warehouseMaterial->material_id) }}"
                                                     method="post">
                                                     @csrf
                                                     <div class="">
@@ -72,6 +72,9 @@
                                                         <input type="number" name="amount" class="form-control mt-3"
                                                             placeholder="Enter the amount"
                                                             max="{{ (int) $warehouseMaterial->value }}" min="0">
+                                                        <span class="text-danger" style="margin-top: 0%;">The max amount
+                                                            should be greater than
+                                                            {{ number_format($warehouseMaterial->value) }}</span>
                                                         <input type="hidden" name="from_id" value="{{ $warehouse->id }}">
                                                     </div>
                                                     <div class="modal-footer">
