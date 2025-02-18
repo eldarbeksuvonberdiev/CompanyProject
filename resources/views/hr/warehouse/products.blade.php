@@ -67,11 +67,21 @@
                                                                     {{ $warehousee->name }}</option>
                                                             @endforeach
                                                         </select>
+                                                        @error('to_id')
+                                                            <div class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
                                                     </div>
                                                     <div class="">
                                                         <input type="number" name="amount" class="form-control mt-3"
                                                             placeholder="Enter the amount"
                                                             max="{{ (int) $warehouseMaterial->value }}" min="0">
+                                                        @error('amount')
+                                                            <div class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
                                                         <span class="text-danger" style="margin-top: 0%;">The max amount
                                                             should be greater than
                                                             {{ number_format($warehouseMaterial->value) }}</span>

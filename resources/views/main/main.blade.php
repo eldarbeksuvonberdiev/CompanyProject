@@ -130,6 +130,22 @@
                                 </ul>
                             </div>
                         </li>
+                        <li class="nav-item active">
+                            <a data-bs-toggle="collapse" href="#production" class="collapsed" aria-expanded="false">
+                                <i class="fas fa-list"></i>
+                                <p>Production</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="production">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{{ route('production.product.index') }}">
+                                            <span class="sub-item">Product</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -167,7 +183,8 @@
                                                 <div class="u-text">
                                                     <h4>Hizrian</h4>
                                                     <p class="text-muted">hello@example.com</p>
-                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
+                                                    <a href="profile.html"
+                                                        class="btn btn-xs btn-secondary btn-sm">View
                                                         Profile</a>
                                                 </div>
                                             </div>
@@ -207,17 +224,7 @@
             </footer>
         </div>
     </div>
-    <script>
-        document.querySelectorAll('.group-checkbox').forEach(groupCheckbox => {
-            groupCheckbox.addEventListener('change', function() {
-                const groupId = this.dataset.group;
-                document.querySelectorAll(`.permission-checkbox[data-group="${groupId}"]`)
-                    .forEach(permissionCheckbox => {
-                        permissionCheckbox.checked = this.checked;
-                    });
-            });
-        });
-    </script>
+    <script src="{{ asset('assets/js/extra.js') }}"></script>
     <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>

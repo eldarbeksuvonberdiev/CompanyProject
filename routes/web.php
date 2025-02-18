@@ -4,6 +4,7 @@ use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionGroupController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\UserController;
@@ -41,5 +42,9 @@ Route::prefix('hr')->name('hr.')->group(function () {
 
 Route::prefix('warehouse')->name('warehouse.')->group(function () {
     Route::resource('/delivery-notes', DeliveryNoteController::class);
-    Route::post('/warehouse-transfer/{material}', [WarehouseMaterialController::class,'transfer'])->name('warehouseMaterial.transfer');
+    Route::post('/warehouse-transfer/{material}', [WarehouseMaterialController::class, 'transfer'])->name('warehouseMaterial.transfer');
+});
+
+Route::prefix('production')->name('production.')->group(function () {
+    Route::resource('product', ProductController::class);
 });
