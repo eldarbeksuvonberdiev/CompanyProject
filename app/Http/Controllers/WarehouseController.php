@@ -93,7 +93,7 @@ class WarehouseController extends Controller
 
     public function products(Warehouse $warehouse)
     {
-        $warehouses = Warehouse::where('id', '!=', $warehouse->id)->get();
+        $warehouses = Warehouse::where('status', 1)->where('id', '!=', $warehouse->id)->get();
         return view('hr.warehouse.products', compact('warehouse', 'warehouses'));
     }
 }

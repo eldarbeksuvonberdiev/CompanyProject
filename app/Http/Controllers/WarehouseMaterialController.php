@@ -33,15 +33,6 @@ class WarehouseMaterialController extends Controller
             ]);
         }
 
-
-
-        // WarehouseMaterial::createOrUpdate([
-        //     'warehouse_id' => $warehouseMaterialTransferRequest->to_id,
-        //     'material_id' => $warehouseMaterial->id
-        // ], [
-        //     'value' => $materialTo->value + $warehouseMaterialTransferRequest->amount
-        // ]);
-
         $materialTo->update([
             'value' => $materialTo->value + $warehouseMaterialTransferRequest->amount
         ]);

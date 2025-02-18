@@ -44,8 +44,12 @@
                                     class="btn btn-{{ $warehouse->status == 1 ? 'success' : 'danger' }} btn-round">{{ $warehouse->status == '1' ? 'Active' : 'Inactive' }}</a>
                             </td>
                             <td>
-                                <a href="{{ route('hr.warehouse.products', $warehouse->id) }}"
-                                    class="btn btn-{{ $warehouse->status == 1 ? 'success' : 'danger' }} btn-round">{{ count($warehouse->warehouseMaterials) }}</a>
+                                <a href="{{ $warehouse->status == 1 ? route('hr.warehouse.products', $warehouse->id) : '#' }}"
+                                    class="btn btn-round btn-{{ $warehouse->status == 1 ? 'success' : 'danger' }}"
+                                    style="{{ $warehouse->status == 1 ? '' : 'pointer-events: none; opacity: 0.6;' }}">
+                                    {{ $warehouse->warehouseMaterials->count() }}
+                                </a>
+
                             </td>
                             <td>
                                 <a href="{{ route('hr.warehouse.edit', $warehouse->id) }}"
