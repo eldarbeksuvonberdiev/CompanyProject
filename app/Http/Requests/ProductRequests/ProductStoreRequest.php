@@ -23,7 +23,8 @@ class ProductStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'image' => 'required|file|mimes:png,jpg,jpeg,bmp',
+            'price' => 'required',
+            'image' => 'required|file|mimes:png,jpg,jpeg,bmp,gif|max:2048',
             'materials' => 'required|array',
             'materials.*.id' => 'required|exists:materials,id',
             'materials.*.quantity' => 'required|numeric|min:1',

@@ -25,13 +25,21 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('production.product.store') }}" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('production.product.store') }}" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Product name</label>
                                             <input type="text" class="form-control" id="name" name="name"
-                                                required>
+                                                required placeholder="Name">
                                             @error('name')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                            <input type="number" class="form-control mt-3" id="price" name="price"
+                                                required placeholder="Price">
+                                            @error('price')
                                                 <div class="text-danger">
                                                     {{ $message }}
                                                 </div>
@@ -84,7 +92,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($products as $product)
+                    {{-- @forelse ($products as $product)
                         <tr>
                             <td>{{ $product->id }}</td>
                             <td>{{ ucfirst($product->name) }}</td>
@@ -93,12 +101,7 @@
                                 <a href="{{ route('hr.product.status', $product->id) }}"
                                     class="btn btn-{{ $product->status == 1 ? 'success' : 'danger' }} btn-round">{{ $product->status == '1' ? 'Active' : 'Inactive' }}</a>
                             </td>
-                            {{-- <td>
-                                <a href="{{ $product->status == 1 ? route('hr.product.products', $product->id) : '#' }}"
-                                    class="btn btn-round btn-{{ $product->status == 1 ? 'success' : 'danger' }}"
-                                    style="{{ $product->status == 1 ? '' : 'pointer-events: none; opacity: 0.6;' }}">
-                                    {{ $product->product->count() }}
-                                </a> --}}
+
 
                             </td>
                             <td>
@@ -116,9 +119,37 @@
                         <tr>
                             <td colspan="7" style="text-align: center;color: grey;">You have no products yet!</td>
                         </tr>
-                    @endforelse
+                    @endforelse --}}
                 </tbody>
             </table>
         </div>
     </div>
+    <script>
+        document.getElementById('addMaterial').addEventListener('click', function() {
+            let container = document.getElementById("materialsContainer");
+            let index = container.children.length;
+
+            let materialRow = document.createElement('div');
+            materialRow.classList.add('d-flex', 'gap-2', 'mb-2');
+
+            materialRow.innerHTML = `
+                <select name="materials[${index}][id]" class="form-control" required>
+                    <option value="">Material tanlang</option>
+                    @foreach ($materials as $material)
+                        <option value="{{ $material->id }}">{{ $material->name }}</option>
+                    @endforeach
+                </select>
+                <input type="number" name="materials[${index}][quantity]" class="form-control" placeholder="Miqdor" min="1" required>
+                <button type="button" class="btn btn-danger btn-round removeMaterial">O'chirish</button>
+            `;
+
+            container.appendChild(materialRow);
+        });
+
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('removeMaterial')) {
+                event.target.closest('div').remove();
+            }
+        });
+    </script>
 @endsection

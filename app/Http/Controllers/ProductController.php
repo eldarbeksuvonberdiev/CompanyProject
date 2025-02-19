@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Material;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequests\ProductStoreRequest;
-use App\Models\Material;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -33,7 +34,39 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $productStoreRequest)
     {
-        
+
+        $validated = $productStoreRequest->validated();
+        $name = $validated['name'];
+        $price = $validated['price'];
+
+
+        $image = $productStoreRequest->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+        $imagePath = 'images/' . $imageName;
+
+
+        $product = Product::create([
+            'name' => $name,
+            'price' => $price,
+            'image' => $imagePath,
+            'slug' => Str::slug($name)
+        ]);
+
+        foreach ($productStoreRequest->validated()['materials'] as $material) {
+
+            $materialData = Material::find($material['id'])->deliveryNoteMaterials->first();
+            
+            $product->materials()->attach($material['id'], [
+                'value' => $material['quantity'],
+                'unit' => $materialData ? $materialData->unit : null
+            ]);
+        }
+
+        return redirect()->route('production.product.index')->with([
+            'status' => 'success',
+            'message' => "$product->name has been created!"
+        ]);
     }
 
     /**

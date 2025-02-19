@@ -15,4 +15,6 @@ class Material extends Model
     {
         return $this->hasMany(MaterialDeliveryNote::class);
     }
+
+
 }

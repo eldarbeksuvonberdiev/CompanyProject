@@ -9,5 +9,12 @@ class Product extends Model
     protected $fillable = [
         'name',
         'image',
+        'price',
+        'slug'
     ];
+
+    public function materials()
+    {
+        return $this->belongsToMany(Material::class);
+    }
 }

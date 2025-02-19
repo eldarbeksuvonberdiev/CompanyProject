@@ -36,7 +36,6 @@ class RoleController extends Controller
      */
     public function store(RoleStoreRequest $roleStoreRequest)
     {
-        // dd($roleStoreRequest->validated());
         $role = Role::create(['name' => $roleStoreRequest->name]);
         $role->permissions()->sync($roleStoreRequest->permissions ?? []);
 

@@ -57,7 +57,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" style="text-align: center;color: grey;">You have no roles yet!</td>
+                            <td colspan="6" style="text-align: center;color: grey;">You have no roles yet!</td>
                         </tr>
                     @endforelse
                 </tbody>
