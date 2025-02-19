@@ -96,7 +96,7 @@
                             <td>{{ $product->id }}</td>
                             <td>{{ ucfirst($product->name) }}</td>
                             <td>
-                                <img src="{{ asset($product->image) }}" alt="" style="width: 30px;">
+                                <img src="{{ asset($product->image) }}" alt="" style="width: 75px;">
                             </td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-round" data-bs-toggle="modal"
@@ -129,7 +129,104 @@
                                 </div>
                             </td>
                             <td>
-                                <button class="btn btn-warning btn-round">Edit</button>
+
+                                <button type="button" class="btn btn-warning btn-round" data-bs-toggle="modal"
+                                    data-bs-target="#edit{{ $product->id }}">
+                                    Edit
+                                </button>
+
+                                <div class="modal fade" id="edit{{ $product->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Product</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="{{ route('production.product.update', $product->id) }}"
+                                                    method="post" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('PUT')
+
+                                                    <div class="mb-3">
+                                                        <label for="name" class="form-label">Product name</label>
+                                                        <input type="text" class="form-control" id="name"
+                                                            name="name" required value="{{ $product->name }}">
+                                                        @error('name')
+                                                            <div class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+
+                                                        <label for="price" class="form-label mt-3">Price</label>
+                                                        <input type="number" class="form-control" id="price"
+                                                            name="price" required value="{{ $product->price }}">
+                                                        @error('price')
+                                                            <div class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+
+                                                        <div class="row mt-3">
+                                                            <div class="col-4">
+                                                                <img src="{{ asset($product->image) }}" alt=""
+                                                                    style="width: 55px;">
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <input type="file" class="form-control mt-3"
+                                                                    id="image" name="image">
+                                                                @error('image')
+                                                                    <div class="text-danger">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <h4 class="mt-4">Materials</h4>
+                                                    <div id="materialsContainerEdit">
+                                                        @foreach ($product->materials as $index => $material)
+                                                            <div
+                                                                class="material-item d-flex align-items-center gap-2 mt-2">
+                                                                <select name="materials[{{ $index }}][id]"
+                                                                    class="form-control" required>
+                                                                    <option value="">Material tanlang</option>
+                                                                    @foreach ($materials as $mat)
+                                                                        <option value="{{ $mat->id }}"
+                                                                            {{ $mat->id == $material->id ? 'selected' : '' }}>
+                                                                            {{ $mat->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+
+                                                                <input type="number"
+                                                                    name="materials[{{ $index }}][quantity]"
+                                                                    class="form-control"
+                                                                    value="{{ $material->pivot->value }}" required>
+
+                                                                <button type="button"
+                                                                    class="btn btn-danger btn-round removeMaterial">O'chirish</button>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+
+                                                    <button type="button" class="btn btn-success btn-round my-2"
+                                                        id="addComponent">Add Material</button>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary btn-round"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary btn-round">Save
+                                                            changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <td>
                                 <form action="{{ route('production.product.destroy', $product->id) }}" method="post">
@@ -172,6 +269,47 @@
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('removeMaterial')) {
                 event.target.closest('div').remove();
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let materialIndex = document.querySelectorAll("#materialsContainerEdit .material-item").length || 0;
+            const addComponentBtn = document.getElementById("addComponent");
+            const materialsContainer = document.getElementById("materialsContainerEdit");
+
+            addComponentBtn.addEventListener("click", function() {
+                materialIndex++;
+                const materialHtml = `
+            <div class="material-item d-flex align-items-center gap-2 mt-2">
+                <select name="materials[${materialIndex}][id]" class="form-control" required>
+                    <option value="">Material tanlang</option>
+                    ${materialsOptions()}
+                </select>
+                <input type="number" name="materials[${materialIndex}][quantity]" class="form-control" placeholder="Value" min="1" required>
+                <button type="button" class="btn btn-danger btn-round removeMaterial">O'chirish</button>
+            </div>
+        `;
+                materialsContainer.insertAdjacentHTML("beforeend", materialHtml);
+            });
+
+            materialsContainer.addEventListener("click", function(event) {
+                if (event.target.classList.contains("removeMaterial")) {
+                    event.target.closest(".material-item").remove();
+                }
+            });
+
+            function materialsOptions() {
+                let options = "";
+                const materialsSelect = document.querySelector("#materialsContainerEdit select");
+                if (materialsSelect) {
+                    materialsSelect.querySelectorAll("option").forEach(option => {
+                        if (option.value !== "") {
+                            options += `<option value="${option.value}">${option.textContent}</option>`;
+                        }
+                    });
+                }
+                return options;
             }
         });
     </script>

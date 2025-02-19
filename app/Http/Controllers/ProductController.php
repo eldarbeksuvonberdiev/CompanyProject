@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequests\ProductStoreRequest;
+use App\Http\Requests\ProductRequests\ProductUpdateRequest;
 
 class ProductController extends Controller
 {
@@ -84,9 +85,33 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest $productUpdateRequest, Product $product)
     {
-        //
+        $validated = $productUpdateRequest->validated();
+        if ($productUpdateRequest->hasFile('image')) {
+            $image = $productUpdateRequest->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $imagePath = 'images/' . $imageName;
+        }
+
+        $syncData = [];
+
+        foreach ($validated['materials'] as $material) {
+            $materialData = Material::find($material['id'])->deliveryNoteMaterials->first();
+
+            $syncData[$material['id']] = [
+                'value' => $material['quantity'],
+                'unit' => $materialData->unit ?? null
+            ];
+        }
+
+        $product->materials()->sync($syncData);
+
+        return redirect()->route('production.product.index')->with([
+            'status' => 'success',
+            'message' => "$product->name has been updated!"
+        ]);
     }
 
     /**
