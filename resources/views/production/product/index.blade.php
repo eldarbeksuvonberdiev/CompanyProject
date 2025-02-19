@@ -92,24 +92,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @forelse ($products as $product)
+                    @forelse ($products as $product)
                         <tr>
                             <td>{{ $product->id }}</td>
                             <td>{{ ucfirst($product->name) }}</td>
-                            <td>{{ $product->user->name }}</td>
                             <td>
-                                <a href="{{ route('hr.product.status', $product->id) }}"
-                                    class="btn btn-{{ $product->status == 1 ? 'success' : 'danger' }} btn-round">{{ $product->status == '1' ? 'Active' : 'Inactive' }}</a>
-                            </td>
-
-
+                                <img src="{{ asset($product->image) }}" alt="" style="width: 30px;">
                             </td>
                             <td>
-                                <a href="{{ route('hr.warehouse.edit', $product->id) }}"
-                                    class="btn btn-warning btn-round">Edit</a>
                             </td>
                             <td>
-                                <form action="{{ route('hr.warehouse.destroy', $product->id) }}" method="post">
+                                <form action="{{ route('production.product.destroy', $product->id) }}" method="post">
                                     @csrf @method('DELETE')
                                     <button class="btn btn-danger btn-round">Delete</button>
                                 </form>
@@ -119,7 +112,7 @@
                         <tr>
                             <td colspan="7" style="text-align: center;color: grey;">You have no products yet!</td>
                         </tr>
-                    @endforelse --}}
+                    @endforelse
                 </tbody>
             </table>
         </div>

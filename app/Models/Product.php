@@ -15,6 +15,8 @@ class Product extends Model
 
     public function materials()
     {
-        return $this->belongsToMany(Material::class);
+        return $this->belongsToMany(Material::class, 'product_ingredients')
+                    ->withPivot(['value', 'unit'])
+                    ->withTimestamps();
     }
 }

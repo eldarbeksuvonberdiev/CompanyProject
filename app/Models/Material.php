@@ -16,5 +16,10 @@ class Material extends Model
         return $this->hasMany(MaterialDeliveryNote::class);
     }
 
-
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_ingredients')
+                    ->withPivot(['value', 'unit'])
+                    ->withTimestamps();
+    }
 }

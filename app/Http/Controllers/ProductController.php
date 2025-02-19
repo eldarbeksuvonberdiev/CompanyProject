@@ -36,30 +36,26 @@ class ProductController extends Controller
     {
 
         $validated = $productStoreRequest->validated();
-        $name = $validated['name'];
-        $price = $validated['price'];
-
 
         $image = $productStoreRequest->file('image');
         $imageName = time() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $imageName);
         $imagePath = 'images/' . $imageName;
 
-
         $product = Product::create([
-            'name' => $name,
-            'price' => $price,
+            'name' => $validated['name'],
+            'price' => $validated['price'],
             'image' => $imagePath,
-            'slug' => Str::slug($name)
+            'slug' => Str::slug($validated['name']),
         ]);
 
-        foreach ($productStoreRequest->validated()['materials'] as $material) {
+        foreach ($validated['materials'] as $material) {
 
             $materialData = Material::find($material['id'])->deliveryNoteMaterials->first();
-            
+
             $product->materials()->attach($material['id'], [
                 'value' => $material['quantity'],
-                'unit' => $materialData ? $materialData->unit : null
+                'unit' => $materialData->unit ?? null
             ]);
         }
 
@@ -98,6 +94,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect()->route('production.product.index')->with([
+            'status' => 'success',
+            'message' => "Product has been deleted!"
+        ]);
     }
 }
