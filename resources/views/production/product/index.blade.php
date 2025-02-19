@@ -87,7 +87,6 @@
                         <th>Image</th>
                         <th>Ingredients</th>
                         <th>Update</th>
-                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -100,6 +99,37 @@
                                 <img src="{{ asset($product->image) }}" alt="" style="width: 30px;">
                             </td>
                             <td>
+                                <button type="button" class="btn btn-primary btn-round" data-bs-toggle="modal"
+                                    data-bs-target="#ingredient{{ $product->id }}">
+                                    Ingredients
+                                </button>
+
+                                <div class="modal fade" id="ingredient{{ $product->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Product Ingredients</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @foreach ($product->materials as $material)
+                                                    <li>{{ ucfirst($material->name) }} - {{ $material->pivot->value }}
+                                                        {{ $material->pivot->unit }}</li>
+                                                @endforeach
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-warning btn-round">Edit</button>
                             </td>
                             <td>
                                 <form action="{{ route('production.product.destroy', $product->id) }}" method="post">
