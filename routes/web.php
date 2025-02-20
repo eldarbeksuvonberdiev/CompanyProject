@@ -47,6 +47,7 @@ Route::prefix('warehouse')->name('warehouse.')->group(function () {
 });
 
 Route::prefix('production')->name('production.')->group(function () {
-    Route::resource('product', ProductController::class);
-    Route::resource('machine', MachineController::class);
+    Route::resource('/product', ProductController::class);
+    Route::resource('/machine', MachineController::class);
+    Route::get('/machine/{machine}', [MachineController::class,'status'])->name('machine.status');
 });
