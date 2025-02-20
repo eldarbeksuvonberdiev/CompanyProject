@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MachineController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionGroupController;
 use App\Http\Controllers\ProductController;
@@ -47,4 +48,5 @@ Route::prefix('warehouse')->name('warehouse.')->group(function () {
 
 Route::prefix('production')->name('production.')->group(function () {
     Route::resource('product', ProductController::class);
+    Route::resource('machine', MachineController::class);
 });

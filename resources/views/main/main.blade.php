@@ -143,6 +143,11 @@
                                             <span class="sub-item">Product</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('production.machine.index') }}">
+                                            <span class="sub-item">Machines</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
