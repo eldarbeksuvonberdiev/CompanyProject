@@ -12,10 +12,11 @@ use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\WarehouseMaterialController;
+use App\Livewire\Manufacturer\ManufacturerComponent;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('main.main');
+    return view('components.layouts.app');
 })->name('main');
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -53,4 +54,5 @@ Route::prefix('production')->name('production.')->group(function () {
     Route::get('/machine/{machine}', [MachineController::class, 'status'])->name('machine.status');
     Route::get('/production', [ProductionController::class, 'index'])->name('production.index');
     Route::post('/production', [ProductionController::class, 'store'])->name('production.store');
+    Route::get('/manufacturer', ManufacturerComponent::class)->name('manufacturer.index');
 });

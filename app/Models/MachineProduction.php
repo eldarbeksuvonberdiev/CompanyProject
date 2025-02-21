@@ -14,4 +14,14 @@ class MachineProduction extends Model
         'defected',
         'status',
     ];
+
+    public function machine()
+    {
+        return $this->belongsTo(Machine::class);
+    }
+
+    public function user()
+    {
+        return User::where('id', $this->user_id)->first();
+    }
 }

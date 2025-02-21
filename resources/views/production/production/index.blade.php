@@ -1,4 +1,4 @@
-@extends('main.main')
+@extends('components.layouts.app')
 
 @section('title', 'Productions')
 
@@ -88,7 +88,102 @@
                             <td>{{ $production->id }}</td>
                             <td>{{ ucfirst($production->product->name) }}</td>
                             <td>
-                                
+                                @switch($production->status)
+                                    @case(0)
+                                        <button type="button" class="btn btn-info btn-round" data-bs-toggle="modal"
+                                            data-bs-target="#productionStatus{{ $production->id }}">
+                                            Given
+                                        </button>
+                                    @break
+
+                                    @case(1)
+                                        <button type="button" class="btn btn-warning btn-round" data-bs-toggle="modal"
+                                            data-bs-target="#productionStatus{{ $production->id }}">
+                                            In Progess
+                                        </button>
+                                    @break
+
+                                    @case(2)
+                                        <button type="button" class="btn btn-success btn-round" data-bs-toggle="modal"
+                                            data-bs-target="#productionStatus{{ $production->id }}">
+                                            Done
+                                        </button>
+                                    @break
+
+                                    @default
+                                @endswitch
+                                <div class="modal fade" id="productionStatus{{ $production->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-hover table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Machine</th>
+                                                                <th>User</th>
+                                                                <th>Count</th>
+                                                                <th>Defected</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @forelse ($production->machineProductions as $machineProduction)
+                                                                <tr>
+                                                                    <td>{{ $machineProduction->machine->name }}</td>
+                                                                    <td>{{ $machineProduction->user()?->name ?? 'No User' }}
+                                                                    </td>
+                                                                    <td>{{ $machineProduction->count }}</td>
+                                                                    <td>{{ $machineProduction->defected }}</td>
+                                                                    <td>
+                                                                        @php
+                                                                            $statusClass = match (
+                                                                                $machineProduction->status
+                                                                            ) {
+                                                                                0 => 'info',
+                                                                                1 => 'warning',
+                                                                                default => 'success',
+                                                                            };
+
+                                                                            $statusText = match (
+                                                                                $machineProduction->status
+                                                                            ) {
+                                                                                0 => 'Given',
+                                                                                1 => 'In Progress',
+                                                                                default => 'Done',
+                                                                            };
+                                                                        @endphp
+
+                                                                        <button
+                                                                            class="btn btn-{{ $statusClass }} btn-round">{{ $statusText }}</button>
+                                                                    </td>
+                                                                </tr>
+                                                            @empty
+                                                                <tr>
+                                                                    <td colspan="6">This production has no machine and
+                                                                        users</td>
+                                                                </tr>
+                                                            @endforelse
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-round"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary btn-round">Save
+                                                    changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @empty

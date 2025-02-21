@@ -1,4 +1,4 @@
-@extends('main.main')
+@extends('components.layouts.app')
 
 @section('title', 'Delivery Notes ' . $deliveryNote->company_name)
 
