@@ -20,7 +20,7 @@ class GeneratePermissions extends Command
         foreach ($routes as $route) {
             if ($name = $route->getName()) {
                 $parts = explode('.', $name);
-                if (count($parts) && $parts[0] !== 'storage') {
+                if (count($parts) && !in_array($parts[0], ['storage', 'livewire'])) {
                     $groupName = ucfirst($parts[0]);
                     $permissionName = $name;
 

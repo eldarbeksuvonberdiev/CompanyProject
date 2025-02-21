@@ -6,6 +6,7 @@ use App\Http\Controllers\MachineController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionGroupController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\UserController;
@@ -49,5 +50,7 @@ Route::prefix('warehouse')->name('warehouse.')->group(function () {
 Route::prefix('production')->name('production.')->group(function () {
     Route::resource('/product', ProductController::class);
     Route::resource('/machine', MachineController::class);
-    Route::get('/machine/{machine}', [MachineController::class,'status'])->name('machine.status');
+    Route::get('/machine/{machine}', [MachineController::class, 'status'])->name('machine.status');
+    Route::get('/production', [ProductionController::class, 'index'])->name('production.index');
+    Route::post('/production', [ProductionController::class, 'store'])->name('production.store');
 });

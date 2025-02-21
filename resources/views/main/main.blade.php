@@ -7,7 +7,6 @@
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="{{ asset('assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
 
-    <!-- Fonts and icons -->
     <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
     <script>
         WebFont.load({
@@ -29,20 +28,18 @@
         });
     </script>
 
-    <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
+    @livewireStyles
 </head>
 
 <body>
     <div class="wrapper">
         <div class="sidebar" data-background-color="dark">
             <div class="sidebar-logo">
-                <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
                     <a href="#" class="logo">
                         <img src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}" alt="navbar brand"
@@ -60,7 +57,6 @@
                         <i class="gg-more-vertical-alt"></i>
                     </button>
                 </div>
-                <!-- End Logo Header -->
             </div>
 
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
@@ -146,6 +142,11 @@
                                     <li>
                                         <a href="{{ route('production.machine.index') }}">
                                             <span class="sub-item">Machines</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('production.production.index') }}">
+                                            <span class="sub-item">Production</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -265,6 +266,7 @@
 
     <script src="{{ asset('assets/js/setting-demo.js') }}"></script>
     <script src="{{ asset('assets/js/demo.js') }}"></script>
+    @livewireScripts
     <script>
         $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
             type: "line",

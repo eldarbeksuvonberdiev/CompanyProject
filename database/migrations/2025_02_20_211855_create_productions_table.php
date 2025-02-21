@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->integer('count');
             $table->integer('defected')->default(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

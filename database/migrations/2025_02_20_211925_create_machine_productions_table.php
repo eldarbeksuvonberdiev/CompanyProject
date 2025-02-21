@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('count');
             $table->integer('defected')->default(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }
