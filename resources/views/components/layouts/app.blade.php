@@ -33,6 +33,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/ekko-lightbox/ekko-lightbox.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+
     @livewireStyles
 </head>
 
@@ -274,6 +279,14 @@
 
     <script src="{{ asset('assets/js/setting-demo.js') }}"></script>
     <script src="{{ asset('assets/js/demo.js') }}"></script>
+    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/filterizr/jquery.filterizr.min.js') }}"></script>
+    <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
+
     @livewireScripts
     <script>
         $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
