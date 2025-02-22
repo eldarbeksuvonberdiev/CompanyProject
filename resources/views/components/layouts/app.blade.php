@@ -217,8 +217,11 @@
                     </div>
                 </nav>
             </div>
-
-            @yield('content')
+            @if (in_array(request()->route()->getName(), ['production.manufacturer.index']))
+                {{ $slot }}
+            @else
+                @yield('content')
+            @endif
 
             <footer class="footer">
                 <div class="container-fluid d-flex justify-content-between">
