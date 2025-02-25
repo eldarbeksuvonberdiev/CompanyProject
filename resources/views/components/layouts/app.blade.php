@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>@yield('title', 'Main')</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-    @livewireStyles
     <link rel="icon" href="{{ asset('assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
 
     <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
@@ -218,11 +217,8 @@
                     </div>
                 </nav>
             </div>
-            @if (in_array(request()->route()->getName(), ['production.manufacturer.index']))
-                {{ $slot }}
-            @else
-                @yield('content')
-            @endif
+
+            @yield('content')
 
             <footer class="footer">
                 <div class="container-fluid d-flex justify-content-between">
@@ -239,7 +235,6 @@
             </footer>
         </div>
     </div>
-    @livewireScripts
     <script>
         document.querySelectorAll('.group-checkbox').forEach(groupCheckbox => {
             groupCheckbox.addEventListener('change', function() {

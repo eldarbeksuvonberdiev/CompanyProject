@@ -24,4 +24,9 @@ class MachineProduction extends Model
     {
         return User::where('id', $this->user_id)->first();
     }
+
+    public function production()
+    {
+        return $this->belongsTo(Production::class);
+    }
 }

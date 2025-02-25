@@ -3,6 +3,7 @@
 use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MachineController;
+use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionGroupController;
 use App\Http\Controllers\ProductController;
@@ -54,5 +55,6 @@ Route::prefix('production')->name('production.')->group(function () {
     Route::get('/machine/{machine}', [MachineController::class, 'status'])->name('machine.status');
     Route::get('/production', [ProductionController::class, 'index'])->name('production.index');
     Route::post('/production', [ProductionController::class, 'store'])->name('production.store');
-    Route::get('/manufacturer', ManufacturerComponent::class)->name('manufacturer.index');
+    Route::get('/manufacturer', [ManufacturerController::class, 'index'])->name('manufacturer.index');
+    Route::get('/manufacturer/start/{machineProduction}', [ManufacturerController::class, 'start'])->name('manufacturer.start');
 });
