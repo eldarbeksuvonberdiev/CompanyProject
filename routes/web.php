@@ -56,5 +56,6 @@ Route::prefix('production')->name('production.')->group(function () {
     Route::get('/production', [ProductionController::class, 'index'])->name('production.index');
     Route::post('/production', [ProductionController::class, 'store'])->name('production.store');
     Route::get('/manufacturer', [ManufacturerController::class, 'index'])->name('manufacturer.index');
-    Route::get('/manufacturer/start/{machineProduction}', [ManufacturerController::class, 'start'])->name('manufacturer.start');
+    Route::get('/manufacturer/start/{machineProduction}/{production}', [ManufacturerController::class, 'start'])->name('manufacturer.start');
+    Route::post('/manufacturer/inProgress/{machineProduction}/{production}', [ManufacturerController::class, 'inProgress'])->name('manufacturer.inProgress');
 });
