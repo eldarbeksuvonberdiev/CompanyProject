@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\History;
 use App\Models\Machine;
 use App\Models\MachineProduction;
 use App\Models\Product;
 use App\Models\Production;
 use App\Models\User;
+use App\Models\WarehouseMaterial;
 use Illuminate\Http\Request;
 
 class ProductionController extends Controller
@@ -43,6 +45,30 @@ class ProductionController extends Controller
                 'user_id' => $value['user'],
                 'count' => $production->count,
             ]);
+        }
+
+        foreach ($production->product->materials as $ingredient) {
+            
+            $warehouseMaterial = WarehouseMaterial::where('warehouse_id', 1)
+                ->where('material_id', $ingredient->material_id)
+                ->first();
+
+            if ($warehouseMaterial) {
+                $wasValue = $warehouseMaterial->value;
+                $beenValue = $wasValue - ($ingredient->value * $data['count']);
+
+                $warehouseMaterial->update(['value' => $beenValue]);
+
+                History::create([
+                    'type' => 3,
+                    'material_id' => $ingredient->material_id,
+                    'quantity' => $ingredient->value * $data['count'],
+                    'was' => $wasValue,
+                    'been' => $beenValue,
+                    'from_id' => 1,
+                    'to_id' => $production->id,
+                ]);
+            }
         }
 
         return back()->with([
