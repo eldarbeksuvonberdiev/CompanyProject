@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MachineController;
@@ -42,6 +43,7 @@ Route::prefix('hr')->name('hr.')->group(function () {
     Route::resource('/warehouse', WarehouseController::class);
     Route::get('/warehouse-status/{warehouse}', [WarehouseController::class, 'status'])->name('warehouse.status');
     Route::get('/warehouse-products/{warehouse}', [WarehouseController::class, 'products'])->name('warehouse.products');
+    Route::resource('/customer', CustomerController::class);
 });
 
 Route::prefix('warehouse')->name('warehouse.')->group(function () {
